@@ -4,7 +4,8 @@
 #include"Algo_storing_stack.cpp"
 
  
-void set_centre_to(char face){
+void set_centre_to(char face)
+{
 	if(DOWN[1][1]==face){
 		X(0);
 		push('X',0);
@@ -59,26 +60,30 @@ void lefty_alg() {
 	L(1);				U(1);				 L(0);				  U(0);
 	push('L',1);	push('U',1);	push('L',0);	push('U',0);
 }
+
 void left_corner_insert() {
-	//printf("lci is called \n");
+	printf("lci is called \n");
 	U(1);  			L(1); 			U(0); 			L(0);
 	push('U',1);	push('L',1);	push('U',0);	push('L',0);
 }
+
 void right_corner_insert() {
-	//printf("rci is called \n");
+	printf("rci is called \n");
 	U(0);  			R(0); 			U(1); 			R(1);
 	push('U',0);	push('R',0);	push('U',1);	push('R',1);
 }
 
 
 
-void  white_cross_solver(){
+
+void  white_cross_solver()
+{
 	set_centre_to('Y');
-	//display();
+	display();
 	
 	while(CENTRE[0][1]!='W' || CENTRE[1][0]!='W' || CENTRE[1][2]!='W' || CENTRE[2][1]!='W')
 	{
-		//display();
+		display();
 		char a[]={LEFT[1][2], RIGHT[1][0], UP[2][1], DOWN[0][1]};
 		if(compare(a,'W'))
 		{
@@ -200,11 +205,11 @@ void  white_cross_solver(){
 			}
 		}
 	}
-	//display();
+	display();
 	
 	while(CENTRE[0][1]=='W' || CENTRE[1][0]=='W' || CENTRE[1][2]=='W' || CENTRE[2][1]=='W')
 	{
-		//display();
+		display();
 		if((UP[2][1]==UP[1][1] and CENTRE[0][1]=='W') || (RIGHT[1][0]==RIGHT[1][1] and CENTRE[1][2]=='W') || (LEFT[1][2]==LEFT[1][1] and CENTRE[1][0]=='W') || (DOWN[0][1]==DOWN[1][1] and CENTRE[2][1]=='W'))
 		{
 			
@@ -245,7 +250,9 @@ void  white_cross_solver(){
 //	exit(0);
 }
 
-bool is_bottom_layer_solved(){
+
+bool is_bottom_layer_solved()
+{
 	for(int i=0;i<3;i++) for(int j=0;j<3;j++) if(DOWN[i][j]!='W') return 0;
 	
 	if(CENTRE[1][1]!=CENTRE[2][0] or CENTRE[1][1]!=CENTRE[2][1] or CENTRE[1][1]!=CENTRE[2][2]) return 0;
@@ -255,30 +262,28 @@ bool is_bottom_layer_solved(){
 	return 1;
 }
 
-void white_corner_solver(int level){
-	if(DOWN[1][1]!='W')
-	{
-		set_centre_to('W');
-		X(1);
-		push('X',1);
-	}
-	
-	int position;//,count=0;
+
+
+void white_corner_solver(int level)
+{
+	X(1);
+	push('X',1);
+	int position,count=0;
 	//char possible[]={UP[2][0], UP[2][2], LEFT[0][2], CENTRE[0][0], CENTRE[0][2], RIGHT[0][0], LEFT[2][2], CENTRE[2][0], CENTRE[2][2], RIGHT[2][0], DOWN[0][0], DOWN[0][2]};
 	int sequence[]={2, 5, 3 ,0 , 1, 4};
 	while(!is_bottom_layer_solved())
 	{
-//		if(count>20) break;
-//		count++;
+		if(count>20) break;
+		count++;
 		
-		//display();
+		display();
 		char possible[]={UP[2][0], UP[2][2], LEFT[0][2], CENTRE[0][0], CENTRE[0][2], RIGHT[0][0], LEFT[2][2], CENTRE[2][0], CENTRE[2][2], RIGHT[2][0], DOWN[0][0], DOWN[0][2]};
 		position=compare(possible,'W');
 		
 		if(position==11 and CENTRE[2][0]==CENTRE[1][1]) position=compare(possible,'W',11);
 		if(position==12 and CENTRE[2][2]==CENTRE[1][1]) position=0;
 		
-		//printf("%d %d\n",count,position);
+		printf("%d %d\n",count,position);
 		
 		if(!position)
 		{
@@ -309,7 +314,7 @@ void white_corner_solver(int level){
 			}
 			//code for corner(1-6) alingment-end
 		}
-		//display();
+		display();
 		//code for corner insertion-start
 		int times=0;
 		if(position==1 or position==2) times=3;
@@ -323,53 +328,49 @@ void white_corner_solver(int level){
 		}
 		if(level ==2 and position==4) left_corner_insert();
 		else if(level ==2 and position==5) right_corner_insert();
-		//display();
+		display();
 		//code for corner insertion-end
 		
 	}
 }
-
-void white_layer_solver(int level)
+int main()
 {
+	display();
+	//giv_cube_array();
+	R(0); R(0); U(0); U(0); R(1); U(1); L(1); U(1); L(0); L(0); U(0); U(0); 
+	
+	X(0); F(0); B(0);// U(0); r(0); u(0); 
+	M(0); E(0); S(0);
+	R(0); R(0); U(0); U(0); R(1); U(1); L(1); U(1); L(0); L(0); U(0); U(0); X(1);            //commenting this 
+	R(0); U(0); R(1); R(1); U(1); L(1); U(1); L(0); L(0); U(0); U(0); X(0);                     // and this will return buggy code.
+	R(0); R(0); U(0); U(1); R(1); F(0); R(0); R(0); U(1); R(1); F(1); R(0); U(0); //R(0); U(0); F(0); B(0); U(0); r(0); u(0); M(0); E(0); S(0);
+	F(0); R(0); R(0); U(1); R(1); 
+
+	
+	//IMPORTANT NOTE - LCI OR RIGHTY OR RCI CAN ALTER POSITION OF WHITE AND CAN BRING THEM BACK TO TOPMOST LAYER OF YELLOW SO WE'LL NEED TO CALL 
+	//EDGE1 ONCE AGAIN.... SAD.
+	
+	
+    // activate for edge 3 solver case
+//	X(0); F(0); B(0);// U(0); r(0); u(0); 
+//	M(0); E(0); S(0);
+	R(0); R(0); U(0); U(0); R(1); U(1); //L(1); U(1); L(0); L(0); U(0); U(0); X(1);            //commenting this 
+//	R(0); U(0); R(1); R(1); U(1); L(1); U(1); L(0); L(0); U(0); U(0); X(0);  				//commenting out this and uncommmenting the lines below will put this code to an infinite loop                   
+	R(0); R(0); U(0); U(1); R(1); F(0); R(0); R(0); U(1); R(1);// F(1); R(0); U(0); R(0); U(0); F(0); B(0); U(0); r(0); u(0); M(0); E(0); S(0);
+	F(0); R(0);// R(0); U(1); R(1);
+	
+	display();
+	
 	white_cross_solver();
+	set_centre_to('W');
+	display();
 	
 	
 	white_corner_solver(2);
-	//set_centre_to('W');
+	set_centre_to('W');
+	display();
+	
+	print_stack();
+	
 	
 }
-
-//int main()
-//{
-//	display();
-//	//giv_cube_array();
-//	R(0); R(0); U(0); U(0); R(1); U(1); L(1); U(1); L(0); L(0); U(0); U(0); 
-//	
-//	X(0); F(0); B(0);// U(0); r(0); u(0); 
-//	M(0); E(0); S(0);
-////	R(0); R(0); U(0); U(0); R(1);// U(1); L(1); U(1); L(0); L(0); U(0); U(0); X(1);            //commenting this 
-//	R(0); U(0); R(1); R(1); U(1); L(1); U(1); L(0); L(0); U(0); U(0); X(0);                     // and this will return buggy code.
-//	R(0); R(0); U(0); U(1); R(1); F(0); R(0); R(0); U(1); R(1); F(1); R(0); U(0); //R(0); U(0); F(0); B(0); U(0); r(0); u(0); M(0); E(0); S(0);
-//	F(0); R(0); R(0); U(1); R(1); 
-//
-//	
-//	//IMPORTANT NOTE - LCI OR RIGHTY OR RCI CAN ALTER POSITION OF WHITE AND CAN BRING THEM BACK TO TOPMOST LAYER OF YELLOW SO WE'LL NEED TO CALL 
-//	//EDGE1 ONCE AGAIN.... SAD.
-//	
-//	
-//    // activate for edge 3 solver case
-//	X(0); F(0); B(0);// U(0); r(0); u(0); 
-//	M(0); E(0); S(0);
-//	R(0); R(0); U(0); U(0); R(1); U(1); //L(1); U(1); L(0); L(0); U(0); U(0); X(1);            //commenting this 
-//	R(0); U(0); R(1); R(1); U(1); L(1); U(1); L(0); L(0); U(0); U(0); X(0);  				//commenting out this and uncommmenting the lines below will put this code to an infinite loop                   
-//	R(0); R(0); U(0); U(1); R(1); F(0); R(0); R(0); U(1); R(1); F(1); R(0); U(0); R(0); U(0); F(0); B(0); U(0); r(0); u(0); M(0); E(0); S(0);
-//	F(0); R(0);// R(0); U(1); R(1);
-//	
-//	white_layer_solver(2);
-//	display();
-//	
-//	
-//	print_stack();
-//	
-//	
-//}

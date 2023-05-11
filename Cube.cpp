@@ -44,6 +44,61 @@ void display(){
 	printf("\n\n");
 }
 
+void print_with_color(char ch)
+{
+	if(ch=='W') printf("\033[2;30;107m %c \033[0m",ch);	//white
+	if(ch=='R') printf("\033[2;30;101m %c \033[0m",ch);	//red
+	if(ch=='B') printf("\033[2;30;104m %c \033[0m",ch);	//Blue
+	if(ch=='G') printf("\033[2;30;102m %c \033[0m",ch);	//green
+	if(ch=='O') printf("\033[2;30;105m %c \033[0m",ch);    //orange
+	if(ch=='Y') printf("\033[2;30;103m %c \033[0m",ch);	//Yellow
+	
+}
+
+void display2(){
+	for(int i=0;i<3;i++)
+	{
+		printf("         ");	
+		print_with_color(UP[i][0]);
+		print_with_color(UP[i][1]);
+		print_with_color(UP[i][2]);
+		printf("\n");
+		
+	}
+	
+	for(int i=0;i<3;i++)
+	{	
+		print_with_color(LEFT[i][0]);
+		print_with_color(LEFT[i][1]);
+		print_with_color(LEFT[i][2]);
+		
+		print_with_color(CENTRE[i][0]);
+		print_with_color(CENTRE[i][1]);
+		print_with_color(CENTRE[i][2]);
+		
+		print_with_color(RIGHT[i][0]);
+		print_with_color(RIGHT[i][1]);
+		print_with_color(RIGHT[i][2]);
+		
+		print_with_color(XRIGHT[i][0]);
+		print_with_color(XRIGHT[i][1]);
+		print_with_color(XRIGHT[i][2]);
+		printf("\n");	
+	}
+	
+	for(int i=0;i<3;i++){
+		printf("         ");	
+		print_with_color(DOWN[i][0]);
+		print_with_color(DOWN[i][1]);
+		print_with_color(DOWN[i][2]);
+		printf("\n");
+		
+	}
+	
+	
+	printf("\n\n");
+}
+
 //for revolution of one layer
 void revolve(char *st,char *nd,char *rd,char *th,int dr){				//dr-direction   1=acw, 0=cw
 
@@ -205,15 +260,18 @@ void b(int flag_prime){
 
 //int main()
 //{
-//	display();
+//	//display();
+//	display2();
 //	R(0); R(0); U(0); U(0); R(1); U(1); L(1); U(1); L(0); L(0); U(0); U(0); X(0);
 //	R(0); R(0); U(0); U(0); R(1); U(1); L(1); U(1); L(0); L(0); U(0); U(0); X(1);
 //	
-//	display();
+//	display2();
 //	Y(0);
-//	display();
+//	
+//	//display();
+//	display2();
 //	Y(1);
-//	display();
+//	display2();
 //	giv_cube_array();
 //		
 //}
