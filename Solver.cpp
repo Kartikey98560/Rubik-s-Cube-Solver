@@ -9,6 +9,7 @@ void set_centre_to(char face){
 		X(0);
 		push('X',0);
 	}
+	
 	else if(UP[1][1]==face){
 		X(1);
 		push('X',1);
@@ -54,10 +55,13 @@ void free(char (* face)[3],int x,int y,char color){    //free the face's [x][y] 
 void righty_alg() {
 	R(0);				U(0);				 R(1);				  U(1);
 	push('R',0);	push('U',0);	push('R',1);	push('U',1);
+	//push('A',0);
 }
 void lefty_alg() {
 	L(1);				U(1);				 L(0);				  U(0);
 	push('L',1);	push('U',1);	push('L',0);	push('U',0);
+	//push('B',0);
+	
 }
 void left_corner_insert() {
 	//printf("lci is called \n");
@@ -78,7 +82,7 @@ void  white_cross_solver(){
 	
 	while(CENTRE[0][1]!='W' || CENTRE[1][0]!='W' || CENTRE[1][2]!='W' || CENTRE[2][1]!='W')
 	{
-		//display();
+//		display2();
 		char a[]={LEFT[1][2], RIGHT[1][0], UP[2][1], DOWN[0][1]};
 		if(compare(a,'W'))
 		{
@@ -235,14 +239,6 @@ void  white_cross_solver(){
 			push('F',0);
 		}
 	}
-	
-//	U(0); U(0);		D(0); D(0); 	R(0); R(0); 	L(0); L(0);
-//	push('U',2);	push('D',2);	push('R',2);	push('L',2);
-//	X(0); X(0);
-//	
-	printf("White Cross is Solved! \n");
-//	display();
-//	exit(0);
 }
 
 bool is_bottom_layer_solved(){
@@ -268,10 +264,8 @@ void white_corner_solver(int level){
 	int sequence[]={2, 5, 3 ,0 , 1, 4};
 	while(!is_bottom_layer_solved())
 	{
-//		if(count>20) break;
-//		count++;
 		
-		//display();
+//		display2();
 		char possible[]={UP[2][0], UP[2][2], LEFT[0][2], CENTRE[0][0], CENTRE[0][2], RIGHT[0][0], LEFT[2][2], CENTRE[2][0], CENTRE[2][2], RIGHT[2][0], DOWN[0][0], DOWN[0][2]};
 		position=compare(possible,'W');
 		
@@ -332,9 +326,11 @@ void white_corner_solver(int level){
 void white_layer_solver(int level)
 {
 	white_cross_solver();
-	
-	
+	printf("White Cross is Solved! \n");
+	display2();
 	white_corner_solver(2);
+	printf("White Corners are Solved! \n");
+	display2();
 	//set_centre_to('W');
 	
 }
