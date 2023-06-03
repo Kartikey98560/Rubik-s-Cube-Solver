@@ -3,30 +3,6 @@
 
 #include"Solver.cpp"
 
-//void set_down_to(char face){
-//	
-//	if(DOWN[1][1]==face){
-//		X(0);
-//		push('X',0);
-//	}
-//	else if(UP[1][1]==face){
-//		X(1);
-//		push('X',1);
-//	}
-//	else if(LEFT[1][1]==face){
-//		Y(1);											
-//		push('Y',1);
-//	}
-//	else if(RIGHT[1][1]==face){
-//		Y(0);
-//		push('Y',0);
-//	}
-//	else if(XRIGHT[1][1]==face){
-//		Y(0); Y(0);
-//		push('Y',0);
-//		push('Y',0);
-//	}
-//}
 
 bool is_second_layer_solved()
 {
@@ -70,13 +46,14 @@ int SLES()		//searches for Second Layer Edges in Second layer
 
 void solve_second_layer()
 {
+	//push_message("Now, hold the cube such that white face is downwards");
 	if(DOWN[1][1]!='W')
 	{
 		set_centre_to('W');
 		X(1);
 		push('X',1);
 	}
-	
+	push_message("Now, we need to solve the second layer. To solve second layer search for non-yellow edges in the second and third layer. If it is in third layer insert it directly otherwise first bring it to the third layer.");
 	while(!is_second_layer_solved())
 	{
 		display2();

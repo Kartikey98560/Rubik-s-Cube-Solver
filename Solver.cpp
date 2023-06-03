@@ -54,12 +54,14 @@ void free(char (* face)[3],int x,int y,char color){    //free the face's [x][y] 
 
 void righty_alg() {
 	R(0);				U(0);				 R(1);				  U(1);
+//	push_message("righty alg");
 	push('R',0);	push('U',0);	push('R',1);	push('U',1);
 	//push("apply right algoritm")
 	//push('A',0);
 }
 void lefty_alg() {
 	L(1);				U(1);				 L(0);				  U(0);
+//	push_message("righty alg");
 	push('L',1);	push('U',1);	push('L',0);	push('U',0);
 	//push('B',0);
 	
@@ -78,18 +80,24 @@ void right_corner_insert() {
 
 
 void  white_cross_solver(){
+	
+	
 	push_message("Hold cube such that yellow face is facing/towards you.");
 	set_centre_to('Y');
 	
 	//display();
-	push_message("Now, we need to align white edges on the yellow face");
-	push_message("Search for the white edges ");
+	push_message("Now, we need to bring all white edges on the yellow face");
+	//push_message("Search for the white edges");
+	
+	//if((XRIGHT[0][1]=='W' && XRIGHT[1][0]=='W' && XRIGHT[1][2]=='W' && XRIGHT[2][1]=='W')) 
+	
 	while(CENTRE[0][1]!='W' || CENTRE[1][0]!='W' || CENTRE[1][2]!='W' || CENTRE[2][1]!='W')
 	{
 //		display2();
 		char a[]={LEFT[1][2], RIGHT[1][0], UP[2][1], DOWN[0][1]};
 		if(compare(a,'W'))
 		{
+			//push_message("");
 			switch(compare(a,'W'))
 			{
 				case 1:
@@ -209,7 +217,8 @@ void  white_cross_solver(){
 		}
 	}
 	//display();
-	
+	push_message("Now,after yellow cross is solved, we need to solve the white cross");
+	//push_message("Now,after yellow cross is solved, we need to solve the white cross");
 	while(CENTRE[0][1]=='W' || CENTRE[1][0]=='W' || CENTRE[1][2]=='W' || CENTRE[2][1]=='W')
 	{
 		//display();
@@ -256,6 +265,8 @@ bool is_bottom_layer_solved(){
 }
 
 void white_corner_solver(int level){
+	
+	push_message("Hold the cube such that white face is downwards");
 	if(DOWN[1][1]!='W')
 	{
 		set_centre_to('W');
@@ -263,6 +274,7 @@ void white_corner_solver(int level){
 		push('X',1);
 	}
 	
+	push_message("Now we need to insert all white corners at their respective positions. To do this search for a white corner piece. If it is top layer, insert it directy using righty or lefty algorithm after correctly aligning it. If it is in bottom layer, first move it the top layer using the same algorith.");
 	int position;//,count=0;
 	//char possible[]={UP[2][0], UP[2][2], LEFT[0][2], CENTRE[0][0], CENTRE[0][2], RIGHT[0][0], LEFT[2][2], CENTRE[2][0], CENTRE[2][2], RIGHT[2][0], DOWN[0][0], DOWN[0][2]};
 	int sequence[]={2, 5, 3 ,0 , 1, 4};
@@ -276,7 +288,6 @@ void white_corner_solver(int level){
 		if(position==11 and CENTRE[2][0]==CENTRE[1][1]) position=compare(possible,'W',11);
 		if(position==12 and CENTRE[2][2]==CENTRE[1][1]) position=0;
 		
-		//printf("%d %d\n",count,position);
 		
 		if(!position)
 		{
@@ -307,7 +318,7 @@ void white_corner_solver(int level){
 			}
 			//code for corner(1-6) alingment-end
 		}
-		//display();
+		
 		//code for corner insertion-start
 		int times=0;
 		if(position==1 or position==2) times=3;

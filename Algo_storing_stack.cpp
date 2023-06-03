@@ -49,25 +49,24 @@ void push(char n,int p)
 	top = temp;
 }
 
-void print_stack()
+void print_stack(node temp = top)
 {
-	node temp = top;
-	while(temp!=NULL)
+	
+	
+	if(temp->next!=NULL) print_stack(temp->next);
+	if(temp->type=='A')
 	{
-		if(temp->type=='A')
-		{
-			printf("  %c",temp->move);
-			if(temp->prime==1) printf("'");
-			else if(temp->prime==2) printf("2");
-			
-		}
-		else if(temp->type=='M')
-		{
-			printf("\n%s",temp->message);
-		}
-		temp=temp->next;
+		printf("  %c",temp->move);
+		if(temp->prime==1) printf("'");
+		else if(temp->prime==2) printf("2");
+		
 	}
-	printf("\n");
+	else if(temp->type=='M')
+	{
+		printf("\n%s  :",temp->message);
+	}
+	temp=NULL;
+	
 }
 //int main()
 //{	

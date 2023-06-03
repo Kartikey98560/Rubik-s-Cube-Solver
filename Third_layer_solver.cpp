@@ -150,6 +150,8 @@ void solve_cross(){
 }
 
 void oll(){
+	
+	
 	display2();
 	int sum=0;
 	int weightage[]={1,2,4,8,0,16,32,64,128};
@@ -306,7 +308,7 @@ int main()
 	display2();
 	
 	
-	scramble(101);
+	scramble(25);
 	display2();
 	
 	white_layer_solver(2);
@@ -318,9 +320,11 @@ int main()
 	
 	display2();
 	
+	push_message("Now that the second layer is solved, we begin to solve the third layer. This will be done in two parts. \nFirstly, solve the yellow face");
 	oll();
 	display2();
 	
+	push_message("Then, solve the third layer corners");
 	pll();
 	print_stack();
 	
