@@ -55,6 +55,7 @@ void free(char (* face)[3],int x,int y,char color){    //free the face's [x][y] 
 void righty_alg() {
 	R(0);				U(0);				 R(1);				  U(1);
 	push('R',0);	push('U',0);	push('R',1);	push('U',1);
+	//push("apply right algoritm")
 	//push('A',0);
 }
 void lefty_alg() {
@@ -77,9 +78,12 @@ void right_corner_insert() {
 
 
 void  white_cross_solver(){
+	push_message("Hold cube such that yellow face is facing/towards you.");
 	set_centre_to('Y');
-	//display();
 	
+	//display();
+	push_message("Now, we need to align white edges on the yellow face");
+	push_message("Search for the white edges ");
 	while(CENTRE[0][1]!='W' || CENTRE[1][0]!='W' || CENTRE[1][2]!='W' || CENTRE[2][1]!='W')
 	{
 //		display2();
