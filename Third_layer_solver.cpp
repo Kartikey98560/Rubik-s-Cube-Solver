@@ -228,7 +228,7 @@ void oll(){
 }
 
 void pll(){
-	display2();
+	
 	int sum=0;
 	//int weightage={1,2,4,8};
 	for(int i=0;i<4;i++,Y(0)) if(CENTRE[0][0]==CENTRE[0][2]) sum+=pow(2,i);
@@ -248,7 +248,6 @@ void pll(){
 		if(count==3) push('U',1);
 		//aligning corners--end
 		
-		display2();
 		
 		//finding bar and applying  respective algorithm
 		int i;
@@ -258,8 +257,6 @@ void pll(){
 			Y(0);
 			
 		}
-		
-		display2();
 		
 		if(CENTRE[0][0]==CENTRE[0][1]) return;		//already solved 
 		
@@ -272,7 +269,6 @@ void pll(){
 		
 		if(CENTRE[1][1]==RIGHT[0][1]) edgeACW();
 		edgeACW();
-		display2();
 		return;
 		//pll();
 	}
@@ -320,12 +316,13 @@ int main()
 	
 	display2();
 	
-	push_message("Now that the second layer is solved, we begin to solve the third layer. This will be done in two parts. \nFirstly, solve the yellow face");
+	push_message("Now that the second layer is solved, we will begin to solve the third layer. This will be done in two parts. \nFirstly, solve the yellow face");
 	oll();
 	display2();
 	
-	push_message("Then, solve the third layer corners");
+	push_message("Then, solve the third layer corners and then edges");
 	pll();
+	display2();
 	print_stack();
 	
 	

@@ -61,13 +61,14 @@ void print_stack(node temp = top)
 		else if(temp->prime==2) printf("2");
 		
 	}
-	else if(temp->type=='M')
+	else if(temp->type=='M' )
 	{
-		printf("\n%s  :",temp->message);
+		printf("\n\n%s  :",temp->message);
 	}
 	temp=NULL;
 	
 }
+
 //int main()
 //{	
 //	push('c',0);
